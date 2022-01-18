@@ -1,0 +1,50 @@
+// import { People16Filled } from "@fluentui/react-icons";
+import React, { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import data from "./Reviewdata";
+const Review = () => {
+  const [index, setIndex] = useState(0);
+  const { name, job, image, text } = data[index];
+  const checknumber = (number) => {
+    if (number > data.length - 1) {
+      return 0;
+    }
+    if (number < 0) {
+      return data.length - 1;
+    }
+
+    return number;
+  };
+  const prevPerson = () => {
+    setIndex((index) => {
+      let newindex = index - 1;
+      return checknumber(newindex);
+    });
+  };
+  const nextPerson = () => {
+    setIndex((index) => {
+      let newindex = index + 1;
+      return checknumber(newindex);
+    });
+  };
+
+  return (
+    <div className="main">
+      <div className="section">
+        <img src={image} alt={name} className="viewer" />
+        <h3>{name}</h3>
+        <h4>{job}</h4>
+        <p>{text}</p>
+      </div>
+      <div className="btn">
+        <button className="prev-btn" onClick={prevPerson}>
+          <FaChevronLeft />
+        </button>
+        <button className="next-btn" onClick={nextPerson}>
+          <FaChevronRight />
+        </button>
+      </div>
+    </div>
+  );
+};
+export default Review;
